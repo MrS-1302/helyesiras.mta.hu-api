@@ -1,5 +1,19 @@
 # helyesiras.mta.hu-api
-Nem hivatalos api a helyesiras.mta.hu hoz.
+Unofficial api for [helyesiras.mta.hu](https://helyesiras.mta.hu/helyesiras/default/suggest).
+
+Use: [mtahelyesiras.myversion.hu](https://mtahelyesiras.myversion.hu)
+
+## For self host
+
+```
+git clone https://github.com/MrS-1302/helyesiras.mta.hu-api.git
+cd helyesiras.mta.hu-api
+npm i
+(optional | edit conf.json) nano src/conf.json
+node src/index.js
+```
+
+http://localhost:12300/
 
 ## Endpoints
 
