@@ -5,11 +5,11 @@ Use: [mtahelyesiras.myversion.hu](https://mtahelyesiras.myversion.hu)
 
 ## For self host
 
-```
+```bash
 git clone https://github.com/MrS-1302/helyesiras.mta.hu-api.git
 cd helyesiras.mta.hu-api
 npm i
-(optional | edit conf.json) nano src/conf.json
+# optional | nano src/conf.json
 node src/index.js
 ```
 
@@ -102,24 +102,24 @@ http://localhost:12300/
     <summary>Example</summary>
     
 ```json
-    {
-        "dbSize": "0.01 MB",
-        "wordsViewed": 9,
-        "cachedWords": 4,
-        "validWords": 4,
-        "notValidWords": 0,
-        "lastCachedWord": {
-            "word": "körte",
-            "valid": 1,
-            "viewed": 1,
-            "cached": "2024-08-16 10:44:50"
-        },
-        "mostFamousWord": {
-            "word": "alma",
-            "valid": 1,
-            "viewed": 5,
-            "cached": "2024-08-16 10:17:17"
-        }
+{
+    "dbSize": "0.01 MB",
+    "wordsViewed": 9,
+    "cachedWords": 4,
+    "validWords": 4,
+    "notValidWords": 0,
+    "lastCachedWord": {
+        "word": "körte",
+        "valid": 1,
+        "viewed": 1,
+        "cached": "2024-08-16 10:44:50"
+    },
+    "mostFamousWord": {
+        "word": "alma",
+        "valid": 1,
+        "viewed": 5,
+        "cached": "2024-08-16 10:17:17"
     }
+}
 ```
 </details>
