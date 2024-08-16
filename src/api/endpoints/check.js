@@ -11,12 +11,13 @@ router.get('/*', async (req, res, next) => {
     let status = 0;
     let msg = 'Ismeretlen hiba!';
     let fromCache = false;
-    if (q.indexOf('%20') == -1) {
+    if (q.indexOf(' ') == -1) {
         if (!/[^a-zA-Z0-9áéíóöőúüűÁÉÍÓÖŐÚÜŰ\-]/g.test(q)) {
             check = await db.all(`SELECT * FROM words WHERE word = '${q}'`);
 
             if (check.length == 1) {
                 fromCache = true;
+                await db.run(`UPDATE words SET viewed = viewed + 1 WHERE word = '${q}'`);
                 if (check[0].valid == 1) {
                     status = 1;
                     msg = 'helyes';
@@ -54,7 +55,8 @@ router.get('/*', async (req, res, next) => {
                     msg = 'hibás';
                 }
 
-                await db.run(`INSERT INTO words (word, valid) VALUES ('${q}', ${msg == 'helyes' ? 1 : 0})`)
+                these.log('i', `New word saved: ${q} | valid: ${msg == 'helyes' ? 'true' : 'false'}`);
+                await db.run(`INSERT INTO words (word, valid) VALUES ('${q}', ${msg == 'helyes' ? 1 : 0})`);
             }
         } else {
             msg = 'Nem tartalmazhat speciális karaktert!';
