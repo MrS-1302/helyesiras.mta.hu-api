@@ -55,7 +55,7 @@ router.get('/*', async (req, res, next) => {
                     msg = 'hibás';
                 }
 
-                these.log('i', `New word saved: ${q} | valid: ${msg == 'helyes' ? 'true' : 'false'}`);
+                these.log('i', `New word saved! | valid: ${msg == 'helyes' ? 'true ' : 'false'} | ${q} `);
                 await db.run(`INSERT INTO words (word, valid) VALUES ('${q}', ${msg == 'helyes' ? 1 : 0})`);
             }
         } else {

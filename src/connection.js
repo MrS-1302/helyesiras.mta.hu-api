@@ -1,7 +1,8 @@
 var sqlite3 = require('sqlite3');
 const these = require('mr.s-these');
+const conf = require('./conf.json')
 
-var dbCon = new sqlite3.Database('./src/words.db', err => {
+var dbCon = new sqlite3.Database(`./src/${conf.db}`, err => {
     if (err) {
         these.log('e', err.message);
     }
