@@ -3,7 +3,7 @@ const app = express()
 const api = require("./api/index")
 require('./connection');
 
-app.use("/api", api)
+app.use("/", api)
 
 app.all('*', async (req, res, next) => {
     res.json({

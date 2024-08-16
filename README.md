@@ -19,12 +19,15 @@ http://localhost:12300/
 
 | Endpoint (GET) | Descreption |
 | --- | --- |
-| /api/check/:word | Szó helyességét ellenőrzi |
-| /api/status | Általános adatokat mutat az adatbázisról |
+| /word/check/:word | Szó helyességét ellenőrzi |
+| /word/random | DB ből egy random szóval tér vissza |
+| /lists/mostFamousWords | TOP 10 legtöbbször ellenőrzött szó |
+| /lists/lastCachedWords | Utolsó 10 rögízett szó |
+| /stats | Általános adatokat mutat az adatbázisról |
 
 ## Response
 
-### /api/check/:word
+### /word/check/:word
 
 ```
 {
@@ -34,13 +37,13 @@ http://localhost:12300/
 }
 ```
 
-| Response | status | msg |
-| --- | --- | --- |
-| /api/check/:word | 1 | helyes |
-|  |  | hibás |
-| /api/check/:word | 0 | Ismeretlen hiba! |
-|  |  | Csak egy szót tartalmazhat! |
-|  |  | Nem tartalmazhat speciális karaktert! |
+| status | msg |
+| --- | --- |
+| 1 | helyes |
+|  | hibás |
+| 0 | Ismeretlen hiba! |
+|  | Csak egy szót tartalmazhat! |
+|  | Nem tartalmazhat speciális karaktert! |
 
 <details>
     <summary>Examples</summary>
@@ -74,25 +77,114 @@ http://localhost:12300/
 ```
 </details>
 
-### /api/status
+### /word/random
+
+```
+{
+    "word": string
+}
+```
+
+<details>
+    <summary>Example</summary>
+
+
+```json
+{
+    "word": "alma"
+}
+```
+</details>
+
+### /lists/mostFamousWords
+
+```
+{
+    "mostFamousWords": [
+        {
+            "word": string,
+            "valid": integer,
+            "checked": integer,
+            "cached": string
+        },
+        ...
+    ]
+}
+```
+
+<details>
+    <summary>Example</summary>
+
+
+```json
+{
+    "mostFamousWords": [
+        {
+            "word": "alma",
+            "valid": 1,
+            "checked": 6,
+            "cached": "2024-08-16 10:44:50"
+        }
+        //...
+    ]
+}
+```
+</details>
+
+### /lists/lastCachedWords
+
+```
+{
+    "lastCachedWords": [
+        {
+            "word": string,
+            "valid": integer,
+            "checked": integer,
+            "cached": string
+        },
+        ...
+    ]
+}
+```
+
+<details>
+    <summary>Example</summary>
+
+
+```json
+{
+    "lastCachedWords": [
+        {
+            "word": "alma",
+            "valid": 1,
+            "checked": 6,
+            "cached": "2024-08-16 10:44:50"
+        }
+        //...
+    ]
+}
+```
+</details>
+
+### /stats
 
 ```
 {
     "dbSize": string,
-    "wordsViewed": integer,
+    "wordsChecked": integer,
     "cachedWords": integer,
     "validWords": integer,
     "notValidWords": integer,
     "lastCachedWord": {
         "word": string,
         "valid": integer,
-        "viewed": integer,
+        "checked": integer,
         "cached": string
     },
     "mostFamousWord": {
         "word": string,
         "valid": integer,
-        "viewed": integer,
+        "checked": integer,
         "cached": string
     }
 }
@@ -102,24 +194,24 @@ http://localhost:12300/
     <summary>Example</summary>
     
 ```json
-{
-    "dbSize": "0.01 MB",
-    "wordsViewed": 9,
-    "cachedWords": 4,
-    "validWords": 4,
-    "notValidWords": 0,
-    "lastCachedWord": {
-        "word": "körte",
-        "valid": 1,
-        "viewed": 1,
-        "cached": "2024-08-16 10:44:50"
-    },
-    "mostFamousWord": {
-        "word": "alma",
-        "valid": 1,
-        "viewed": 5,
-        "cached": "2024-08-16 10:17:17"
+    {
+        "dbSize": "0.01 MB",
+        "wordsChecked": 9,
+        "cachedWords": 4,
+        "validWords": 4,
+        "notValidWords": 0,
+        "lastCachedWord": {
+            "word": "körte",
+            "valid": 1,
+            "checked": 1,
+            "cached": "2024-08-16 10:44:50"
+        },
+        "mostFamousWord": {
+            "word": "alma",
+            "valid": 1,
+            "checked": 5,
+            "cached": "2024-08-16 10:17:17"
+        }
     }
-}
 ```
 </details>

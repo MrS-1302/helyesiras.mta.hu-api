@@ -17,7 +17,7 @@ router.get('/*', async (req, res, next) => {
 
             if (check.length == 1) {
                 fromCache = true;
-                await db.run(`UPDATE words SET viewed = viewed + 1 WHERE word = '${q}'`);
+                await db.run(`UPDATE words SET checked = checked + 1 WHERE word = '${q}'`);
                 if (check[0].valid == 1) {
                     status = 1;
                     msg = 'helyes';

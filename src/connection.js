@@ -26,7 +26,7 @@ function all(asd) {
 }
 
 (async function () {
-    await run("CREATE TABLE IF NOT EXISTS words (id INTEGER PRIMARY KEY, word VARCHAR(75), valid BOOLEAN, viewed INT DEFAULT 1, cached DATETIME)");
+    await run("CREATE TABLE IF NOT EXISTS words (id INTEGER PRIMARY KEY, word VARCHAR(75), valid BOOLEAN, checked INT DEFAULT 1, cached DATETIME)");
     await run("CREATE TRIGGER IF NOT EXISTS set_words_timestamp AFTER INSERT ON words FOR EACH ROW WHEN NEW.cached IS NULL BEGIN UPDATE words SET cached = datetime('now', 'localtime') WHERE id = NEW.id; END;");
 })()
 
